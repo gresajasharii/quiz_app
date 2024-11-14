@@ -32,7 +32,7 @@ fastify.get('/api/quizzes', async (request, reply) => {
     const quizzes = await prisma.quiz.findMany({
       include: { questions: true },
     });
-    console.log(`Quizzes fetched successfully:, quizzes`);
+    console.log('Quizzes fetched successfully:', quizzes);
     return quizzes;
   } catch (error) {
     console.error('Error fetching quizzes:', error);
@@ -114,8 +114,12 @@ const start = async () => {
   try {
     await prisma.$connect();
     console.log('Database connected successfully');
-    await fastify.listen({ port: Number(process.env.PORT) || 8080, host: '0.0.0.0' });
-    console.log(`Server running on http://localhost:${process.env.PORT || 8080}`);
+
+    // Use the PORT environment variable provided by Google Cloud Run
+    const port = process.env.PORT || 8080;
+    await fastify.listen({ port: Number(port), host: '0.0.0.0' });
+
+    console.log(`Server running on http://localhost:${port}`);
   } catch (err) {
     console.error('Error starting server:', err);
     process.exit(1);
