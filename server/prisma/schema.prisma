@@ -30,3 +30,15 @@ model UserQuizResult {
   totalQuestions Int
   createdAt      DateTime @default(now())
 }
+
+model QuizSessions {
+  id        Int       @id @default(autoincrement())
+  email     String
+  quizId    Int
+  completed Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  endTime   DateTime?
+  startTime DateTime  @default(now())
+
+  @@unique([email, quizId])
+}

@@ -1,39 +1,34 @@
-class SessionManager {
-    // Tracks sessions with email as primary key and quizId as nested key.
-    private sessions: { [email: string]: { [quizId: number]: boolean } } = {};
+// SessionManager.ts
+import { PrismaClient } from '@prisma/client';
 
-    // Initializes a new session if it does not already exist.
-    startSession(email: string, quizId: number): void {
-        if (!this.sessions[email]) {
-            this.sessions[email] = {};
-        }
-        if (this.sessions[email][quizId] === undefined) {
-            this.sessions[email][quizId] = false; // Initializes quiz as "not completed"
-            console.log(`Session started: email=${email}, quizId=${quizId}, completed=false`);
-        } else {
-            console.log(`Session already exists for email=${email}, quizId=${quizId}, completed=${this.sessions[email][quizId]}`);
-        }
-    }
+// Initialize Prisma client
+const prisma = new PrismaClient();
 
-    // Marks a session as completed for the specified email and quizId.
-    completeSession(email: string, quizId: number): void {
-        if (this.sessions[email] && this.sessions[email][quizId] !== undefined) {
-            this.sessions[email][quizId] = true; // Marks the quiz as "completed"
-            console.log(`Session completed: email=${email}, quizId=${quizId}, completed=true`);
-            console.log(`Updated session state:, JSON.stringify(this.sessions, null, 2)`);
-        } else {
-            console.log(`Failed to complete session: email=${email}, quizId=${quizId} not found in sessions`);
-        }
-    }
+const sessionManager = {
+  // Check if the user has completed a quiz
+  async hasCompleted(email: string, quizId: number): Promise<boolean> {
+    const session = await prisma.quizSessions.findUnique({
+      where: { email_quizId: { email, quizId } },
+    });
+    return session?.completed || false;
+  },
 
-    // Checks if a session for a given quiz has already been completed.
-    hasCompleted(email: string, quizId: number): boolean {
-        const completed = this.sessions[email]?.[quizId] ?? false;
-        console.log(`Checking completion status for email=${email}, quizId=${quizId}, completed=${completed}`);
-        console.log(`Current session state at check:, JSON.stringify(this.sessions, null, 2)`);
-        return completed;
-    }
-}
+  // Start a quiz session for a user
+  async startSession(email: string, quizId: number): Promise<void> {
+    await prisma.quizSessions.upsert({
+      where: { email_quizId: { email, quizId } },
+      update: { completed: false },
+      create: { email, quizId, completed: false },
+    });
+  },
 
-// Export as a singleton instance to maintain a single session manager across the application
-export default new SessionManager();
+  // Mark a session as completed
+  async completeSession(email: string, quizId: number): Promise<void> {
+    await prisma.quizSessions.update({
+      where: { email_quizId: { email, quizId } },
+      data: { completed: true },
+    });
+  },
+};
+
+export default sessionManager;
