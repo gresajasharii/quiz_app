@@ -89,16 +89,16 @@ https://github.com/gresajasharii/quiz_app
 The backend provides the following endpoints:
 
 - **GET /api/quizzes:**
-- **Fetches all quizzes along with their questions**
+    - **Fetches all quizzes along with their questions**
 
 - **POST /api/start-session:**
-- **Starts a quiz session for a user if they haven't completed it**
-  - **Body:** 
-   - **json**
-   - **{**
+    - **Starts a quiz session for a user if they haven't completed it**
+    - **Body:** 
+     - **json**
+     - **{**
      - **"email": "user@student.uni-pr.edu",**
      - **"quizId": 1**
-   - **}**
+     - **}**
 
 - **GET /api/check-session:**
 Checks if a user has already completed a quiz
