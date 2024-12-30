@@ -1,4 +1,3 @@
-// SessionManager.ts
 import { PrismaClient } from '@prisma/client';
 
 // Initialize Prisma client
@@ -27,6 +26,7 @@ const sessionManager = {
     await prisma.quizSessions.update({
       where: { email_quizId: { email, quizId } },
       data: { completed: true },
+      
     });
   },
 };
