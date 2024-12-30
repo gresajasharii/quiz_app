@@ -22,7 +22,7 @@ The Online Quiz Application is a user-friendly platform where users can take qui
 - **Score Display:** Displays the user's final score after completing the quiz.
 
 
-## Technologies Used
+# Technologies Used
 
 ### Backend
 - **Node.js v20** 
@@ -95,10 +95,10 @@ Fetches all quizzes along with their questions
 Starts a quiz session for a user if they haven't completed it
     - **Body:** 
      - **json**
-     {
+     - **{**
      - **"email": "user@student.uni-pr.edu",**
      - **"quizId": 1**
-     }
+     - **}**
 
 - **GET /api/check-session:**
 Checks if a user has already completed a quiz
@@ -110,14 +110,19 @@ Checks if a user has already completed a quiz
 Submits the user’s quiz score and marks the quiz as completed
      - **Body:**
      - **json**
-     {
+     - **{**
      - **"email": "user@student.uni-pr.edu",**
      - **"quizId": 1,**
      - **"score": 85,**
      - **"totalQuestions": 10**
-     }
+     - **}**
 
 - **GET /api/quiz-results:** 
 Fetches all submitted quiz results
 
 
+# Screenshots
+
+This is the main page where users are required to enter their email to start the quiz. If you try to enter an email that does not end with `@student.uni-pr.edu`, a validation message is displayed, as shown in the screenshot below:
+
+![Main Page Email Validation](client/public/1.png)
