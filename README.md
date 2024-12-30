@@ -126,3 +126,19 @@ Fetches all submitted quiz results
 This is the main page where users are required to enter their email to start the quiz. If you try to enter an email that does not end with `@student.uni-pr.edu`, a validation message is displayed, as shown in the screenshot below:
 
 ![Main Page Email Validation](images/1.png)
+
+
+After entering the email `student@student.uni-pr.edu`, the application displays the quiz questions with two options: True and False. Users have the ability to navigate to the previous question to revise their answers if needed.
+
+![Quiz Questions](images/2.png)
+
+
+Upon completing the quiz, the results are displayed, showing the score and a "Go Home" button that redirects users back to the main page.
+
+![Quiz Results](images/3.png)
+
+
+If the user attempts to retake the quiz with the same email student@student.uni-pr.edu, the application prevents the action and displays a validation message, as shown in the screenshot.
+
+![Retaking Quiz Restriction](images/4.png)
+
