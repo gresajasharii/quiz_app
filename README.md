@@ -6,10 +6,10 @@ The Online Quiz Application is a user-friendly platform where users can take qui
 # Table of Contents
 1. [Features](#features)
 2. [Technologies Used](#technologies-used)
-3. [Installation and Setup](#setup-instructions)
+3. [Installation and Setup](#installation-and-setup)
    - [Frontend Setup](#frontend-setup)
     - [Backend Setup](#backend-setup)
-4. [Project Structure](#projectstructure)
+4. [Project Structure](#project-structure)
 5. [Screenshots](#screenshots)
 
 
@@ -68,13 +68,15 @@ https://github.com/gresajasharii/quiz_app
 
 - **cd ../sever**
 - **Create Environment Variables:** 
-  ## Add a .env file in the server directory with the following content:
-  ## DATABASE_URL=your_postgresql_database_url
-  ## PORT 5000
+   - **Add a .env file in the server directory with the following content:**
+     - **DATABASE_URL=your_postgresql_database_url**
+     - **PORT 5000**
  - **npm install**
 - **Set Up the Database:**
-   - **Run migrations to create the database schema: npx prisma migrate dev --name init**
-   - **Seed the database with sample data: npx ts-node prisma/seed.ts**
+   - **Run migrations to create the database schema:** 
+      - **npx prisma migrate dev --name init**
+   - **Seed the database with sample data:** 
+      - **npx ts-node prisma/seed.ts**
  - **npm run dev**
 
 - **The backend will be available at http://localhost:5000**
@@ -87,16 +89,16 @@ https://github.com/gresajasharii/quiz_app
 The backend provides the following endpoints:
 
 - **GET /api/quizzes:**
-Fetches all quizzes along with their questions
+- **Fetches all quizzes along with their questions**
 
 - **POST /api/start-session:**
-Starts a quiz session for a user if they haven't completed it
-   Body: 
-   json
-   {
-     "email": "user@student.uni-pr.edu",
-     "quizId": 1
-   }
+- **Starts a quiz session for a user if they haven't completed it**
+  - **Body:** 
+   - **json**
+   - **{**
+     - **"email": "user@student.uni-pr.edu",**
+     - **"quizId": 1**
+   - **}**
 
 - **GET /api/check-session:**
 Checks if a user has already completed a quiz
