@@ -125,4 +125,4 @@ Fetches all submitted quiz results
 
 This is the main page where users are required to enter their email to start the quiz. If you try to enter an email that does not end with `@student.uni-pr.edu`, a validation message is displayed, as shown in the screenshot below:
 
-![Main Page Email Validation](client/public/1.png)
+![Main Page Email Validation](images/1.png)
